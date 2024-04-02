@@ -14,3 +14,39 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+
+.middle{
+  justify-content: center;
+}
+
+.stack{
+  width: 45%;
+  
+  
+}
+/*  Above, I gave the input areas for the date and title a width of 45% */
+.line{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+/* Then, I gave those same areas a flex direction of row */
+
+.height{
+  height: 200px;
+}
+
+.height2{
+  height: 100px;
+  
+}
+/* Above, I gave the form a hight of 200px and the text area a height of 100px*/
+.center{
+  justify-content: center;
+  
+}
+.green{
+  background-color: green;
+}
+
+/* Above, I centered the add task button and gave it a background color of green. /*
