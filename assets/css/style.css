@@ -56,3 +56,19 @@ body {
   
 }
 
+.red{
+  background-color: red;
+}
+
+.yellow{
+  background-color: yellow;
+}
+
+
+.button:hover{
+  background-color: red;
+}
+
+#drag {
+  z-index: 9999; /* Adjust the value as needed */
+}
