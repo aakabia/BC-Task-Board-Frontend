@@ -11,6 +11,9 @@ flatpickr("#inputDate", {});
 
 
 
+
+//console.log(deleteButton);
+
 // Above, I picked multiple itmes from my html and also made task list a empty array to use later.
 // Also, i used the flatpickr API instead of dayjs to display the date.
 
@@ -47,6 +50,7 @@ function createTaskCard(task) {
   divh5.setAttribute("class", "card-title");
   divP.setAttribute("class", "card-text");
   deleteBttn.setAttribute("class", "btn btn-primary red button border-dark");
+  deleteBttn.setAttribute("id", "delete")
 
 
   divHEL.textContent= task.title
@@ -111,7 +115,7 @@ function renderTaskList() {
 
   
     // Above, I added jquery to make the card created draggable by selecting elements with a id of drag.  
-  }
+}
 
 
 
@@ -181,13 +185,111 @@ function handleAddTask(event) {
 
 
 // Todo: create a function to handle deleting a task
-function handleDeleteTask(event) {}
+function handleDeleteTask(event) {
+  
+  event.preventDefault();
+  event.stopPropagation();
+  
+  
+ // Above, I defined and called two event handeler functions
+
+ 
+  let deleteButton = event.target.closest('#delete');
+  console.log(deleteButton);
+ // Above, I  queried the button made from the createtask card function 
+  
+
+  let task = taskList;
+  console.log(task);
+
+
+  let actualTaskID = deleteButton.closest('#drag').dataset.taskId;
+  console.log(actualTaskID)
+
+  // Above, I recived the task ID of the actual event clicked. 
+
+  let indexToRemove = task.findIndex(task => task.id === actualTaskID);
+
+  // Above, I found the index of the task I want to delete. 
+    
+  if (indexToRemove !== -1) {
+   task.splice(indexToRemove, 1);
+  }
+
+  // Above, I created conditional based on the index to remove.
+  // Then I use the .splice method to remove that index.   
+      
+      
+      
+  console.log(task)
+ // Above, I cosole log task again to see if an item was removed from array. 
+
+
+  let userTaskSerialized = JSON.stringify(task);
+
+  localStorage.setItem("tasks", userTaskSerialized);
+  
+  // Above, I saved the new arry back to local storage.
+
+
+  
+  renderTaskList()
+
+  // Above, I reload the page each time the button is clicked and render the new task cards 
+
+
+    
+};
+
+  
+
+
+ 
+
+
+
+
+
+
+
+  
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {}
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+  
   addTask.addEventListener("click", handleAddTask);
   renderTaskList();
-});
+  
+
+  toDoCards.addEventListener("click", handleDeleteTask);
+
+
+})
+
